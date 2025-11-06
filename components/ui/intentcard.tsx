@@ -9,7 +9,7 @@ export const IntentCard = ({ intent }: { intent: any }) => {
       <ul className="text-sm space-y-1">
         {Object.entries(intent).map(([key, value]) => (
           <li key={key}>
-            <strong>{key}:</strong> {value}
+            <strong>{key}:</strong> {String(value)}
           </li>
         ))}
       </ul>

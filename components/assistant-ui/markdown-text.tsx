@@ -128,8 +128,8 @@ const defaultComponents = memoizeMarkdownComponents({
     text = children.map(child => typeof child === "string" ? child : "").join("").trim();
   } else if (typeof children === "string") {
     text = children.trim();
-  } else if (typeof children === "object" && "props" in children) {
-    text = String(children.props.children).trim();
+  } else if (children && typeof children === "object" && "props" in children) {
+    text = String((children as any).props?.children ?? "").trim();
   }
   console.log("text", text)
   if (isIntentJson(text)) {
