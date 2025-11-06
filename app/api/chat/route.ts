@@ -1,54 +1,38 @@
-import { openai } from "@ai-sdk/openai";
-import { frontendTools } from "@assistant-ui/react-ai-sdk";
-import { streamText } from "ai";
-import { createOpenAI } from "@ai-sdk/openai";
-export const runtime = "edge";
-export const maxDuration = 30;
-
-const fireworks = createOpenAI({
-  apiKey: process.env.OPENAI_API_KEY ?? "",
-  baseURL: 'https://openrouter.ai/api/v1',
-});
-const isIntentPrompt = (msg: string) =>
-  /(please\s)?(swap|send|transfer|stake|unstake|bridge|buy|sell|mint)\b/i.test(msg);
+// app/api/chat/route.ts  (Edge runtime ok)
+import { NextResponse } from 'next/server';
+export const runtime = 'edge';
 
 export async function POST(req: Request) {
-  const { messages: userMessages, tools } = await req.json();
-  const latestMsg = userMessages.at(-1)?.content ?? "";
+  const body = await req.json().catch(() => ({}));
+  const chatInput = body.chatInput ?? "berapa total transaksi payin di table payin ?";
+  const sessionId = body.sessionId ?? "sess-test-123455";
+  const user = body.user ?? "rozaq";
+  console.log("API Chat Input:", { chatInput, sessionId, user });
+  const webhookUrl = "https://rozaq.app.n8n.cloud/webhook/f3f8da85-3ccf-44fd-8a98-bff0edc767a0";
 
-  const system = isIntentPrompt(latestMsg[0].text)
-    ? `
-      You are a DeFi transaction assistant.
-      Your job is to extract transaction intent and return it as raw JSON only.
+  const payload = { sessionId, action: "sendMessage", chatInput, user };
 
-      JSON structure must look like this:
-      {
-        "action": "transfer",
-        "token": "USDC",
-        "amount": 50,
-        "recipient": "0xabc...",
-        "chain": "ethereum"
-      }
-
-      Do NOT include any explanations or markdown. Only return valid JSON.
-    `
-    : `
-      You are a helpful DeFi assistant.
-      Answer questions normally and conversationally.
-    `;
-  const result = streamText({
-     system,
-    // model: openai("gpt-4o"),
-    model: fireworks("qwen/qwen3-235b-a22b-07-25:free"),
-    messages: userMessages,
-    // forward system prompt and tools from the frontend
-    toolCallStreaming: true,
-    // system,
-    tools: {
-      ...frontendTools(tools),
-    },
-    onError: console.log
-  });
-
-  return result.toDataStreamResponse();
+  try {
+    const r = await fetch(webhookUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    let n8nData: any = null;
+    const ct = r.headers.get("content-type") ?? "";
+    if (ct.includes("application/json")) {
+      n8nData = await r.json().catch(() => null);
+    } else {
+      n8nData = await r.text().catch(() => null);
+    }
+    // Extract reply — adjust if your n8n returns different key
+    const reply =
+      (n8nData && (n8nData.reply || n8nData.output || n8nData.message || n8nData.result)) ??
+      (typeof n8nData === "string" ? n8nData : null) ??
+      "Tidak ada jawaban dari agent";
+    console.log("API Chat Reply:", n8nData);
+    return NextResponse.json({ success: r.ok, reply, raw: n8nData });
+  } catch (err: any) {
+    return NextResponse.json({ success: false, error: String(err?.message ?? err) }, { status: 500 });
+  }
 }
