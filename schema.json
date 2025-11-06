@@ -1,0 +1,896 @@
+{
+  "generated_at": "2025-11-06T00:00:00Z",
+  "notes": "Schema snapshot extracted from provided DDL. sample_rows empty — populate with sample_rows tool if needed.",
+  "tables": {
+    "action_log_users": {
+      "description": "Action log per user",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"user_id","type":"uuid","nullable":true,"default":null},
+        {"name":"data","type":"jsonb","nullable":true,"default":null},
+        {"name":"type_action_logs","type":"varchar(255)","nullable":false,"default":"'ACTION_USERS'"},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "affiliates": {
+      "description": "Affiliate / referral data",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"phone","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "balance_history": {
+      "description": "History perubahan balance",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(30,8)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"transaction_id","type":"uuid","nullable":false,"default":null},
+        {"name":"type_transaction","type":"varchar(255)","nullable":false,"default":"'payin'"},
+        {"name":"type_wallet","type":"varchar(255)","nullable":false,"default":"'apm'"},
+        {"name":"running_balance_available","type":"numeric(30,8)","nullable":false,"default":null},
+        {"name":"running_balance_expected","type":"numeric(30,8)","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"reason_admin","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"mid","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"sort_no","type":"bigserial","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "balance_merchant_users": {
+      "description": "Saldo per merchant user",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"total_balance_available","type":"numeric(30,8)","nullable":false,"default":null},
+        {"name":"total_hold_balance","type":"numeric(30,8)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"total_balance_expected","type":"numeric(30,8)","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "cache": {
+      "description": "Generic cache table",
+      "columns": [
+        {"name":"key","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"value","type":"text","nullable":false,"default":null},
+        {"name":"expiration","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "cache_locks": {
+      "description": "Locking for cache operations",
+      "columns": [
+        {"name":"key","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"owner","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"expiration","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "chargeback": {
+      "description": "Chargeback events",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"chargeback_fee","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"reason","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"description","type":"text","nullable":false,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"amount_after_fee","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"id_admin","type":"uuid","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "failed_jobs": {
+      "description": "Background job failures",
+      "columns": [
+        {"name":"id","type":"bigserial","nullable":false,"default":null},
+        {"name":"uuid","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"connection","type":"text","nullable":false,"default":null},
+        {"name":"queue","type":"text","nullable":false,"default":null},
+        {"name":"payload","type":"text","nullable":false,"default":null},
+        {"name":"exception","type":"text","nullable":false,"default":null},
+        {"name":"failed_at","type":"timestamp(0)","nullable":false,"default":"CURRENT_TIMESTAMP"}
+      ],
+      "sample_rows": []
+    },
+    "failed_jobs_admin": {
+      "description": "Admin-level failed jobs",
+      "columns": [
+        {"name":"id","type":"bigserial","nullable":false,"default":null},
+        {"name":"uuid","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"connection","type":"text","nullable":false,"default":null},
+        {"name":"queue","type":"text","nullable":false,"default":null},
+        {"name":"payload","type":"text","nullable":false,"default":null},
+        {"name":"exception","type":"text","nullable":false,"default":null},
+        {"name":"failed_at","type":"timestamp(0)","nullable":false,"default":"CURRENT_TIMESTAMP"}
+      ],
+      "sample_rows": []
+    },
+    "fee_management": {
+      "description": "Fee rules & configs",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"fee_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"fee_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"cut_fee_from","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"fee_status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"start_date","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"end_date","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"frequency","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"charged_date_type","type":"varchar(255)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "fee_management_transaction_logs": {
+      "description": "Logs of fee calculations per trx",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"fee_id","type":"uuid","nullable":false,"default":null},
+        {"name":"original_charged_date","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"attempt_date","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"execute_by","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"balance_before","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"balance_after","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"transaction_status","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"notes","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"invoice_number","type":"varchar","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "fraud_reports": {
+      "description": "Reports created by fraud team",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"reported_by","type":"uuid","nullable":true,"default":null},
+        {"name":"resolved_by","type":"uuid","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"date_reported","type":"timestamptz(0)","nullable":true,"Default":null},
+        {"name":"dispute_deadline","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"original_amount","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"fee_taken","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"final_amount","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"admin_notes","type":"text","nullable":true,"default":null},
+        {"name":"date_resolved","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"resolution_notes","type":"text","nullable":true,"default":null},
+        {"name":"merchant_notes","type":"text","nullable":true,"default":null},
+        {"name":"meta","type":"jsonb","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"user_id","type":"uuid","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "job_batches": {
+      "description": "Background job batch metadata",
+      "columns": [
+        {"name":"id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"total_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"pending_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"failed_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"failed_job_ids","type":"text","nullable":false,"default":null},
+        {"name":"options","type":"text","nullable":true,"default":null},
+        {"name":"cancelled_at","type":"int4","nullable":true,"default":null},
+        {"name":"created_at","type":"int4","nullable":false,"default":null},
+        {"name":"finished_at","type":"int4","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "job_batches_admin": {
+      "description": "Admin job batch metadata",
+      "columns": [
+        {"name":"id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"total_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"pending_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"failed_jobs","type":"int4","nullable":false,"default":null},
+        {"name":"failed_job_ids","type":"text","nullable":false,"default":null},
+        {"name":"options","type":"text","nullable":true,"default":null},
+        {"name":"cancelled_at","type":"int4","nullable":true,"default":null},
+        {"name":"created_at","type":"int4","nullable":false,"default":null},
+        {"name":"finished_at","type":"int4","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "jobs": {
+      "description": "Background jobs queue",
+      "columns": [
+        {"name":"id","type":"bigserial","nullable":false,"default":null},
+        {"name":"queue","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payload","type":"text","nullable":false,"default":null},
+        {"name":"attempts","type":"int2","nullable":false,"default":null},
+        {"name":"reserved_at","type":"int4","nullable":true,"default":null},
+        {"name":"available_at","type":"int4","nullable":false,"default":null},
+        {"name":"created_at","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "jobs_admin": {
+      "description": "Admin background jobs queue",
+      "columns": [
+        {"name":"id","type":"bigserial","nullable":false,"default":null},
+        {"name":"queue","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payload","type":"text","nullable":false,"default":null},
+        {"name":"attempts","type":"int2","nullable":false,"default":null},
+        {"name":"reserved_at","type":"int4","nullable":true,"default":null},
+        {"name":"available_at","type":"int4","nullable":false,"default":null},
+        {"name":"created_at","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "migrations": {
+      "description": "DB migration history",
+      "columns": [
+        {"name":"id","type":"serial4","nullable":false,"default":null},
+        {"name":"migration","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"batch","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "notification_merchant": {
+      "description": "Notifications targeted to merchants",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"category","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"event_type","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"message","type":"text","nullable":false,"default":null},
+        {"name":"action_link","type":"text","nullable":true,"default":null},
+        {"name":"read_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "notifications_admin": {
+      "description": "Admin notifications",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"category","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"event_type","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"message","type":"text","nullable":false,"default":null},
+        {"name":"action_link","type":"text","nullable":true,"default":null},
+        {"name":"read_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "password_reset_tokens": {
+      "description": "Password reset tokens for users",
+      "columns": [
+        {"name":"email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"token","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "payin_methods": {
+      "description": "Available payin methods",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payment_provider_id","type":"uuid","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"method_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"expiration_time","type":"int4","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "payment_providers": {
+      "description": "Third-party payment provider list/config",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"provider_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"credentials","type":"json","nullable":false,"default":null},
+        {"name":"is_active","type":"bool","nullable":false,"default":"true"},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"code","type":"varchar(6)","nullable":false,"default":null},
+        {"name":"country_code","type":"varchar(2)","nullable":false,"default":null},
+        {"name":"country_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"config","type":"jsonb","nullable":false,"default":"{\"refund\": \"false\", \"chargeback\": \"false\"}"},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "payout_methods": {
+      "description": "Available payout methods",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payment_provider_id","type":"uuid","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"method_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "personal_access_tokens": {
+      "description": "API/personal access tokens (sanitized)",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"token","type":"text","nullable":true,"default":null},
+        {"name":"env","type":"varchar(255)","nullable":false,"default":"'sandbox'"},
+        {"name":"redirect_url","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"notification_url","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"signature_key","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"additional_info","type":"jsonb","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "report_balance_merchant": {
+      "description": "Merchant balance report snapshots",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"type_report","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"date_created_timezone","type":"timestamptz(0)","nullable":false,"default":null},
+        {"name":"total_trx_approved","type":"int4","nullable":false,"default":null},
+        {"name":"total_trx_amount_approved","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"total_trx_canceled","type":"int4","nullable":false,"default":null},
+        {"name":"total_trx_amount_canceled","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"total_trx_declined","type":"int4","nullable":false,"default":null},
+        {"name":"total_trx_amount_declined","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"total_trx_refund","type":"int4","nullable":false,"default":null},
+        {"name":"total_trx_amount_refund","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"total_trx_charges_back","type":"int4","nullable":false,"default":null},
+        {"name":"total_trx_amount_charges_back","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"trx_approved","type":"int4","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payment_provider","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "rolling_reserve": {
+      "description": "Rolling reserve entries per merchant",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"hold_percentage","type":"numeric(15,2)","nullable":true,"default":null},
+        {"name":"hold_period","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"release_date","type":"date","nullable":false,"default":null},
+        {"name":"released_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "rolling_reserve_setting": {
+      "description": "Settings for rolling reserve calculation",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"hold_period","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":true,"default":"'ACTIVE'"}
+      ],
+      "sample_rows": []
+    },
+    "sessions": {
+      "description": "User sessions (web/mobile)",
+      "columns": [
+        {"name":"id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"user_id","type":"uuid","nullable":true,"default":null},
+        {"name":"ip_address","type":"varchar(45)","nullable":true,"default":null},
+        {"name":"user_agent","type":"text","nullable":true,"default":null},
+        {"name":"payload","type":"text","nullable":false,"default":null},
+        {"name":"last_activity","type":"int4","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "settlement_card": {
+      "description": "Card settlement records metadata",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"filename","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"title","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"description","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"timezone","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "settlements": {
+      "description": "Settlement batches/records",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(10)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(15,2)","nullable":false,"default":null},
+        {"name":"fee","type":"numeric(15,2)","nullable":true,"default":null},
+        {"name":"description","type":"text","nullable":false,"default":null},
+        {"name":"status","type":"varchar(50)","nullable":false,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"transaction_fee_percentage","type":"numeric(5,2)","nullable":true,"default":null},
+        {"name":"transaction_fee_amount","type":"numeric(15,2)","nullable":true,"default":null},
+        {"name":"timezone","type":"varchar(255)","nullable":false,"default":"'UTC'"},
+        {"name":"requested_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"approved_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "tenants": {
+      "description": "Tenant/master multi-tenant data",
+      "columns": [
+        {"name":"id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"data","type":"json","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "users": {
+      "description": "User accounts table",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email_verified_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"password","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"remember_token","type":"varchar(100)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"role","type":"varchar(255)","nullable":false,"default":"'ADMIN'"},
+        {"name":"msisdn","type":"varchar(15)","nullable":false,"default":"'0'"},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "va_list": {
+      "description": "Virtual account list",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"va_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"phone","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "virtual_account": {
+      "description": "Virtual account transactions/configs",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"user_name","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"user_yymmdd","type":"int8","nullable":true,"default":null},
+        {"name":"account_bankname","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"account_number","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"account_holder","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"additional_info","type":"json","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":"'PENDING'"},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "webhook_loggers": {
+      "description": "Webhook request/response logs",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"id_type_webhook","type":"uuid","nullable":false,"default":null},
+        {"name":"type_webhook","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"data","type":"jsonb","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "digital_payments": {
+      "description": "Records for digital payment channels",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payment_provider_id","type":"uuid","nullable":false,"default":null},
+        {"name":"payment_code","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payment_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"category","type":"varchar(100)","nullable":false,"default":null},
+        {"name":"country_code","type":"bpchar(2)","nullable":false,"default":null},
+        {"name":"country_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"currency","type":"bpchar(3)","nullable":false,"default":null},
+        {"name":"image_path","type":"varchar(2083)","nullable":true,"default":null},
+        {"name":"is_active","type":"bool","nullable":false,"default":"true"},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"is_payin_allowed","type":"bool","nullable":false,"default":"false"},
+        {"name":"is_va_allowed","type":"bool","nullable":false,"default":"false"}
+      ],
+      "sample_rows": []
+    },
+    "domains": {
+      "description": "Domain records (tenant domains)",
+      "columns": [
+        {"name":"id","type":"serial4","nullable":false,"default":null},
+        {"name":"domain","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"tenant_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "merchant_users": {
+      "description": "Merchant user accounts/profile",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_identifier_id","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"username","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"legal_business_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"dba","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"website","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"business_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"email_verified_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"password","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"remember_token","type":"varchar(100)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"data_account_info","type":"jsonb","nullable":true,"default":null},
+        {"name":"data_personal_info","type":"jsonb","nullable":true,"default":null},
+        {"name":"data_company_info","type":"jsonb","nullable":true,"default":null},
+        {"name":"parent_users","type":"uuid","nullable":true,"default":null},
+        {"name":"roles","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"permission_users","type":"jsonb","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"affiliate_id","type":"uuid","nullable":true,"default":null},
+        {"name":"id_admin","type":"uuid","nullable":true,"default":null},
+        {"name":"is_display_logo","type":"bool","nullable":true,"default":"true"}
+      ],
+      "sample_rows": []
+    },
+    "merchant_users_file_uploads": {
+      "description": "Files uploaded by merchant users",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"type","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"tittle","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"description","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"filename","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"reason","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"id_admin","type":"uuid","nullable":true,"default":null},
+        {"name":"name_admin","type":"varchar(255)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "payin": {
+      "description": "Main payin transactions table",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"amount_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"transaction","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"transaction_date","type":"timestamp(0)","nullable":false,"default":null},
+        {"name":"payment_method","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"order_reference","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"customer_full_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"reply_code","type":"text","nullable":false,"default":null},
+        {"name":"brand","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"credit_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payer_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"recon_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"order_reference_1","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"order_reference_2","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"platform_identifier","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"trx_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"customer_email","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"customer_phone","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"customer_personal_number","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"fee_taken","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"fee_expected","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"charge_back","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"rolling_serve","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"retrieval","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"is_black_list","type":"int2","nullable":false,"default":"0"},
+        {"name":"ip_address","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"billing_address_country","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"billing_address_city","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"billing_address_zip_code","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"billing_address","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"bin","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"is_3ds","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"bank_psp","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"payment_date","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"reply_code_id_pg","type":"text","nullable":true,"default":null},
+        {"name":"original_amount","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"additional_info","type":"jsonb","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "payment_request": {
+      "description": "Outgoing/incoming payment request records",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"checkout_token","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"amount","type":"numeric(18,2)","nullable":false,"default":null},
+        {"name":"currency","type":"bpchar(3)","nullable":false,"default":null},
+        {"name":"country_code","type":"bpchar(2)","nullable":false,"default":null},
+        {"name":"country_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payin_method_name","type":"varchar(100)","nullable":true,"default":null},
+        {"name":"payin_type","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"description","type":"text","nullable":true,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"customer_id","type":"varchar(200)","nullable":true,"default":null},
+        {"name":"redirect_url","type":"varchar(2083)","nullable":true,"default":null},
+        {"name":"webhook_url","type":"varchar(2083)","nullable":true,"default":null},
+        {"name":"advanced_redirect_url","type":"json","nullable":true,"default":null},
+        {"name":"expire_at","type":"timestamp(0)","nullable":false,"default":null},
+        {"name":"additional_info","type":"json","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"status","type":"varchar(50)","nullable":false,"default":"'PENDING'"}
+      ],
+      "sample_rows": []
+    },
+    "payout": {
+      "description": "Payout transactions table",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"wire_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"order_id","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"due_date","type":"date","nullable":false,"default":null},
+        {"name":"last_action","type":"date","nullable":true,"default":null},
+        {"name":"wire_amount","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"fee_taken","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"fee_expected","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"payee_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"currency","type":"varchar(3)","nullable":false,"default":null},
+        {"name":"beneficiary","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"beneficiary_bank","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"beneficiary_account_number","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"beneficiary_account_iban","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"wire_origin","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"conversion","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"process","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"approval","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"approved_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"denied_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"pending_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"reply_code_id_pg","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"original_amount","type":"numeric(30,2)","nullable":false,"default":null},
+        {"name":"reason_for_failure","type":"text","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "refund_request": {
+      "description": "Refund request records",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"comment","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"reply_code_id_pg","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"amount","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"fee","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"amount_after_fee","type":"numeric(30,2)","nullable":true,"default":null},
+        {"name":"type_fee","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"id_admin","type":"uuid","nullable":true,"default":null},
+        {"name":"request_status","type":"varchar(255)","nullable":false,"default":"'PENDING'"}
+      ],
+      "sample_rows": []
+    },
+    "tenant_pivot": {
+      "description": "Tenant relational pivot table",
+      "columns": [
+        {"name":"id","type":"serial4","nullable":false,"default":null},
+        {"name":"tenant_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "terminal_setting": {
+      "description": "Terminal / POS settings per merchant",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"transaction_routing","type":"jsonb","nullable":true,"default":null},
+        {"name":"mid_selection","type":"jsonb","nullable":true,"default":null},
+        {"name":"merchant_fees","type":"jsonb","nullable":true,"default":null},
+        {"name":"status","type":"varchar(255)","nullable":false,"default":"'DISABLE'"},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "blacklist_users": {
+      "description": "Users yang diblacklist",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"customer_id","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "files_payin": {
+      "description": "Uploaded files related to payin",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"filename","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"file_type","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"title","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"description","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"approved","type":"bool","nullable":true,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamptz(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "files_payout": {
+      "description": "Uploaded files related to payout",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payout_id","type":"uuid","nullable":false,"default":null},
+        {"name":"filename","type":"varchar(255)","nullable":true,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "installment": {
+      "description": "Installment payment records",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"amount","type":"int8","nullable":false,"default":null},
+        {"name":"comment","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "notes": {
+      "description": "General notes",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"notes","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"payin_id","type":"uuid","nullable":false,"default":null},
+        {"name":"merchant_id","type":"uuid","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamptz(0)","nullable":true,"default":null},
+        {"name":"deleted_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "order_summary": {
+      "description": "Aggregated order summaries",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"payment_request_id","type":"uuid","nullable":false,"default":null},
+        {"name":"total_items","type":"int4","nullable":false,"default":null},
+        {"name":"total_amount","type":"numeric(18,2)","nullable":false,"default":null},
+        {"name":"currency","type":"bpchar(3)","nullable":false,"default":null},
+        {"name":"description","type":"text","nullable":true,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "order_fees": {
+      "description": "Fees per order item/transaction",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"order_summary_id","type":"uuid","nullable":false,"default":null},
+        {"name":"fee_name","type":"varchar(100)","nullable":false,"default":null},
+        {"name":"fee_amount","type":"numeric(18,2)","nullable":false,"default":null},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    },
+    "order_items": {
+      "description": "Line items for orders",
+      "columns": [
+        {"name":"id","type":"uuid","nullable":false,"default":null},
+        {"name":"order_summary_id","type":"uuid","nullable":false,"default":null},
+        {"name":"product_name","type":"varchar(255)","nullable":false,"default":null},
+        {"name":"quantity","type":"int4","nullable":false,"default":null},
+        {"name":"unit_price","type":"numeric(18,2)","nullable":false,"default":null},
+        {"name":"total_price","type":"numeric(18,2)","nullable":false,"default":"GENERATED ALWAYS AS ((quantity::numeric * unit_price)) STORED"},
+        {"name":"created_at","type":"timestamp(0)","nullable":true,"default":null},
+        {"name":"updated_at","type":"timestamp(0)","nullable":true,"default":null}
+      ],
+      "sample_rows": []
+    }
+  }
+}
