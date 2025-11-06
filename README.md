@@ -4,7 +4,7 @@
 First, add your OpenAI API key to `.env.local` file:
 
 ```
-OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+BASE_URL_N8N=XX
 ```
 
 Then, run the development server:
