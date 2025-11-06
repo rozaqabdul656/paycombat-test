@@ -69,7 +69,7 @@ export default function SimpleChat() {
 
   return (
     <div className="max-w-3xl mx-auto h-[74vh] flex flex-col border rounded-md overflow-hidden">
-      <div className="bg-slate-50 p-3 border-b">Paycombat Copilot</div>
+      <div className="bg-slate-50 p-3 border-b">Paycombat Ops Center (POC)</div>
 
       <div ref={listRef} className="flex-1 p-4 overflow-auto bg-white space-y-3">
         {messages.map((m) => (

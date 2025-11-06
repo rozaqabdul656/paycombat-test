@@ -18,7 +18,7 @@ export const Assistant = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="#">Paycombat Copilot</BreadcrumbLink>
+                <BreadcrumbLink href="#">Paycombat Ops Center (POC)</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
             </BreadcrumbList>
